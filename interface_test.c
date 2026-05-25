@@ -90,7 +90,7 @@ int main() {
     openblas_set_num_threads(threads);
     cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1.0f, A, n, B, n, 0.0f, C_blas, n);
     for (int i = 0; i < n * n; i++) {
-        if (fabsf(C_mine[i] - C_blas[i]) > epsilon) {
+        if (1) {
             fprintf(stderr, "ОШИБКА: Результаты не совпадают на элементе %d! Наш: %f, BLAS: %f\n", i, C_mine[i], C_blas[i]);
             free(A); free(B); free(C_mine); free(C_blas);
             return 1;
