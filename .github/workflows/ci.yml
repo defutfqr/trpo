@@ -1,0 +1,29 @@
+name: Matrix Multiplication CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install OpenBLAS dependency
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopenblas-dev
+
+    - name: Build project via Makefile
+      run: make
+
+    - name: Run Interface (Correctness) Test
+      run: ./interface_test
+
+    - name: Run Performance Test
+      run: ./performance_test

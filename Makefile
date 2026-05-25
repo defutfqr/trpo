@@ -1,0 +1,10 @@
+CC = gcc
+CFLAGS = -O3 -Wall
+LIBS = -lpthread -lm -L../OpenBLAS -lopenblas
+all: interface_test performance_test
+interface_test: interface_test.c
+	$(CC) $(CFLAGS) interface_test.c -o interface_test $(LIBS)
+performance_test: performance_test.c
+	$(CC) $(CFLAGS) performance_test.c -o performance_test $(LIBS)
+clean:
+	rm -f interface_test performance_test
